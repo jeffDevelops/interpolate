@@ -17,6 +17,7 @@ import { ICursor } from 'styled-icons/fa-solid/ICursor';
 import { IInterpolation } from './interpolation.interface';
 
 import selectionColors from '../../config/selectionColors';
+import { MAX_INTERPOLATIONS } from '../../config/maxInterpolations';
 
 import _ from 'lodash';
 
@@ -130,12 +131,14 @@ class Interpolate extends Component<IProps, IState> {
         interpolateMode: true,
         shouldShowSelectionColorTooltip: true,
         shouldShowInterpolationTooltip: false,
+        currentColor: selectionColors[this.state.interpolations.length],
       });
     } else {
       return this.setState({
         interpolateMode: false,
         shouldShowSelectionColorTooltip: false,
         shouldShowInterpolationTooltip: false,
+        currentColor: '',
       });
     }
   }
@@ -146,11 +149,14 @@ class Interpolate extends Component<IProps, IState> {
     if (window === null) return;
     if (window.getSelection()) text = window.getSelection()!.toString();
 
-    // If it doesn't exist already, place it in state at the user-specified index
-    if (text && !this.state.interpolations.map(interpolation => interpolation.string).includes(text)) {
+    // If it doesn't exist already, and if we haven't run out of interpolations, place it in state at the user-specified index
+    if (text && (this.state.interpolations.length <= MAX_INTERPOLATIONS) && !this.state.interpolations.map(interpolation => interpolation.string).includes(text)) {
       const interpolations: IInterpolation[] = [ ...this.state.interpolations ];
-      interpolations.push({ string: text, hexColor: this.state.currentColor });
-      this.setState({ interpolations });
+      const newInterpolationIndex = this.state.interpolations.length;
+      interpolations.push({ string: text, hexColor: selectionColors[newInterpolationIndex] });
+      this.setState({ interpolations }, () => this.setState({
+        currentColor: selectionColors[newInterpolationIndex + 1] ? selectionColors[newInterpolationIndex + 1] : '',
+      }));
     }
   }
 
@@ -197,36 +203,6 @@ class Interpolate extends Component<IProps, IState> {
                       left="60px"
                       facing={ Direction.left }>
                       Allow users of this code to interpolate their own text
-                    </Tooltip>
-
-                  }
-
-                  { state.shouldShowSelectionColorTooltip &&
-
-                    <Tooltip
-                      width="175px"
-                      height="75px"
-                      top="0"
-                      bottom="0"
-                      left="60px"
-                      facing={ Direction.left }>
-                      <Fragment>
-                        <FlexStartRow padding="0" margin="0 0 5px 0">
-                          <p>Select a color:</p>
-                        </FlexStartRow> 
-
-                        <FlexStartRow padding="0">
-                          { selectionColors.map(color => (
-                            <ColorOption
-                              onClick={ () => this.setState({ currentColor: color }) }
-                              key={ color }
-                              backgroundColor={ color }
-                            />
-                          ))}
-                        </FlexStartRow>
-
-                      </Fragment>
-
                     </Tooltip>
 
                   }
