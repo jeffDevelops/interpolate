@@ -112,6 +112,7 @@ class Interpolate extends Component<IProps, IState> {
     shouldShowInterpolationTooltip: false,
     shouldShowSelectionColorTooltip: false,
     shouldShowInterpolationsList: false,
+    shouldShowTextEditorTooltip: false,
   }
 
   componentDidMount() {
@@ -122,7 +123,24 @@ class Interpolate extends Component<IProps, IState> {
     this.selectionChangeEvent = document.removeEventListener('mouseup', this.setInterpolation);
   }
 
-  setInterpolation = () => {
+  toggleInterpolateMode = (): void => {
+    const { interpolateMode } = this.state;
+    if (!interpolateMode) {
+      return this.setState({
+        interpolateMode: true,
+        shouldShowSelectionColorTooltip: true,
+        shouldShowInterpolationTooltip: false,
+      });
+    } else {
+      return this.setState({
+        interpolateMode: false,
+        shouldShowSelectionColorTooltip: false,
+        shouldShowInterpolationTooltip: false,
+      });
+    }
+  }
+
+  setInterpolation = (): void => {
     // Set the text var
     let text: string | null = "";
     if (window === null) return;
@@ -152,15 +170,14 @@ class Interpolate extends Component<IProps, IState> {
 
                 <RoundButton
                   onMouseEnter={ () => {
-                    (!state.shouldShowSelectionColorTooltip && !state.interpolateMode) && this.setState({ shouldShowInterpolationTooltip: true });
-                    state.interpolateMode && this.setState({ shouldShowTextEditorTooltip: true });
+                    (!state.interpolateMode && !state.shouldShowSelectionColorTooltip) && this.setState({ shouldShowInterpolationTooltip: true });
+                    (state.interpolateMode && !state.shouldShowSelectionColorTooltip) && this.setState({ shouldShowTextEditorTooltip: true });
                   }}
-                  onMouseLeave={ () => this.setState({ shouldShowInterpolationTooltip: false }) }
-                  onClick={ () => this.setState({
-                    interpolateMode: true,
-                    shouldShowSelectionColorTooltip: true,
+                  onMouseLeave={ () => this.setState({
                     shouldShowInterpolationTooltip: false,
-                  })}
+                    shouldShowTextEditorTooltip: false,
+                  }) }
+                  onClick={ this.toggleInterpolateMode }
                   onBlur={ () => this.setState({
                     shouldShowSelectionColorTooltip: false,
                     shouldShowInterpolationTooltip: false,
@@ -210,6 +227,20 @@ class Interpolate extends Component<IProps, IState> {
 
                       </Fragment>
 
+                    </Tooltip>
+
+                  }
+
+                  { state.shouldShowTextEditorTooltip &&
+                    <Tooltip
+                      width="200px"
+                      height="55px"
+                      top="0"
+                      bottom="0"
+                      left="60px"
+                      facing={ Direction.left }
+                    >
+                      <p>Enter Text Edit Mode</p>
                     </Tooltip>
 
                   }

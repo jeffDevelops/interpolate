@@ -15,12 +15,14 @@ interface ListItemProps {
 export const DropdownListItem = styled.li<ListItemProps>`
   padding: 10px;
   background-color: #fff;
-  transition: background-color ${props => props.theme.transition_out};
+  transition: background-color ${props => props.theme.transition_out}, color ${props => props.theme.transition_out};
   cursor: pointer;
+  user-select: none;
 
   &:hover {
-    background-color: ${props => props.theme.light_gray};
-    transition: background-color ${props => props.theme.transition_in};
+    background-color: ${props => props.theme.red};
+    color: #fff;
+    transition: background-color ${props => props.theme.transition_in}, color ${props => props.theme.transition_in};
   }
 `;
 
@@ -40,6 +42,7 @@ export const DropdownHeader = styled.div<HeaderProps>`
   align-items: center;
   position: relative;
   cursor: pointer;
+  user-select: none;
 `;
 
 export const DropdownList = styled.ul<ListProps>`
@@ -47,7 +50,7 @@ export const DropdownList = styled.ul<ListProps>`
   z-index: 9;
   left: 0;
   right: 0;
-  top: 35px;
+  top: 45px;
   height: auto;
   margin: auto;
   padding: 0;
@@ -57,4 +60,5 @@ export const DropdownList = styled.ul<ListProps>`
   border-radius: ${props => props.theme.br};
   background-color: #fff;
   overflow: hidden;
+  user-select: none;
 `;
