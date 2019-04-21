@@ -25,7 +25,7 @@ interface Props {
 
 const Container = styled.div`
   padding: 0 15px;
-  height: 100%;
+  height: calc(100% - 35px);
 `;
 
 class TextEditor extends Component<Props, any> {

@@ -170,7 +170,7 @@ class Interpolate extends Component<IProps, IState> {
       <Fragment>
         <Container>
           <SelectionColorOverride backgroundColor={ state.currentColor } />
-          <Panel>
+          <Panel minHeight="80vh">
             <SpaceBetweenRow borderBottom margin="0">
               <FlexGroup>
 
@@ -240,7 +240,6 @@ class Interpolate extends Component<IProps, IState> {
               />
               
             </SpaceBetweenRow>
-
 
             <TextEditor />
           </Panel>

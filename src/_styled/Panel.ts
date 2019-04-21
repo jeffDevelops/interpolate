@@ -5,9 +5,11 @@ interface Props {
   readonly margin?: string,
   readonly padding?: string,
   readonly height?: string,
+  readonly minHeight?: string,
 }
 
 const Panel = styled.section<Props>`
+  minHeight: ${props => props.minHeight ? props.minHeight : 'none'};
   height: ${props => props.height ? props.height : '100%'};
   width: ${props => props.width ? props.width : '100%'};
   margin: ${props => props.margin ? props.margin : '0'};

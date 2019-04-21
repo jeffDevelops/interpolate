@@ -47,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
 
   .react-codemirror2 {
     box-sizing: border-box;
-    height: calc(100% - 90px); /* account for the padding around the editor */
+    height: calc(100% - 50px); /* account for the padding around the editor */
     width: 100%;
     overflow: hidden;
     padding-bottom: 0;
