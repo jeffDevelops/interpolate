@@ -1,0 +1,80 @@
+div {
+  --selectionColor: #EBF4FB;
+  --tm_red: rgba(240, 0, 80, 1);
+  --tm_lt_red: #F26562;
+  --tm_purple: #3F4673;
+  --tm_blue: #BBFFFF;
+  --tm_md_purple: #7680BF;
+  --tm_lt_purple: #9399BF;
+  --tm_md_gray: #B5B6BA;
+  --tm_lt_gray: #E3E4E9;
+}
+
+.CodeMirror-gutters { background-color: #fff; }
+
+.CodeMirror .CodeMirror-selected { background-color: rgba(240, 0, 80, .1) }
+span {
+  color: var(--tm_md_gray);
+}
+
+.box pre       { color: white; }
+/* ; => + - ++ -- > < () */
+.cm-m-javascript { color: var(--tm_md_gray); }
+/* e.g. var, function */
+.cm-keyword    { color: var(--tm_lt_purple); }
+/* e.g. #id */
+.cm-atom       { color: var(--tm_md_purple); }
+/* e.g. 20 */
+.cm-number     { color: var(--tm_md_purple); }
+/* e.g. px, em */
+.cm-unit       { color: var(--tm_md_purple); }
+/* e.g. @include, [this] */
+.cm-def        { color: var(--tm_md_purple); }
+/* e.g. var(, i */ 
+.cm-variable   { color: var(--tm_purple); }
+.cm-m-javascript.cm-variable { color: var(--tm_purple); }
+/* e.g. for key in [this], Markdown li */ 
+.cm-variable-2 { color: var(--tm_purple); }
+/* e.g. getElementbyId, CSS properties */ 
+.cm-property   { color: var(--tm_md_purple); }
+/* e.g. CoffeeScript ->, CSS colons */ 
+.cm-operator   { color: var(--tm_lt_purple); }
+/* e.g. // comments */
+
+.cm-comment {
+  color: #fff;
+  background-color: var(--tm_lt_gray);
+  font-style: italic;
+} 
+
+.cm-m-javascript.cm-comment { color: #fff; background-color: var(--tm_lt_gray); }
+/* e.g. "string" */ 
+.cm-string, .cm-m-xml.cm-string { color: var(--tm_red); }
+/* e.g. some CSS values */ 
+.cm-string-2   { color: var(--tm_red); }
+/* e.g. @font-face */ 
+.cm-meta       { color: var(--tm_lt_purple); }
+/*  */ 
+.cm-header     { color: var(--tm_lt_purple); }
+/* e.g. HTML elements */ 
+.cm-tag, .cm-m-xml.cm-tag { color: var(--tm_md_purple); }
+/* Angle brackets <> */
+.cm-m-xml.cm-tag.cm-bracket { color: var(--tm_purple); }
+/* e.g. class="" id="" */ 
+.cm-attribute, .cm-m-xml.cm-attribute  { color: var(--tm_lt_purple); }
+/* XML stuff, like the = inside JSX */
+.cm-m-xml { color: var(--tm_purple); }
+/* not sure if used */ 
+.cm-strong     { color: #ddca7e; }
+/* not sure if used */ 
+.cm-em         { color: #ddca7e; }
+/* e.g. .box */ 
+.cm-qualifier  { color: #ddca7e; }
+/* not sure if used */ 
+.cm-builtin    { color: #ddca7e; }
+/* HTML SPECIFIC */
+/* e.g. markdown blockquote */
+.box-html .cm-atom { color: #96b38a; }
+/* CSS SPECIFIC */ 
+/* e.g. h1, h2 */
+.box-css .cm-tag { color: #ddca7e; }
